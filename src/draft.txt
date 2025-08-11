@@ -1,0 +1,8 @@
+#use custom hooks
+#react ratings
+#react simple captcha
+#swiper js
+#react simple form hook
+#tanstack query
+
+use jwt to verify user authentication , also use for admin verification.

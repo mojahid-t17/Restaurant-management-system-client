@@ -1,0 +1,16 @@
+
+.carousel .thumbs-wrapper {
+
+  display: flex;
+  
+  justify-content: center;
+}
+
+.carousel .thumb {
+
+
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+}
+
