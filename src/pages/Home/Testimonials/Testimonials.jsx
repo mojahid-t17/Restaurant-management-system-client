@@ -20,7 +20,7 @@ const Testimonials = () => {
         setRivews(data);
       });
   }, []);
-  console.log(rivews);
+  // console.log(rivews);
   return (
     <div className="my-7">
       <SectionTitle

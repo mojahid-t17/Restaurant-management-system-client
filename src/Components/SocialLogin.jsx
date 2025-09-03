@@ -1,11 +1,12 @@
 import { useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import UseAxiosPublic from "../Hooks/UseAxiosPublic";
 import { AuthContext } from "../Provider/AuthProvider";
 
 
 const SocialLogin = () => {
     const {signInwithGogle}=useContext(AuthContext);
+    const location=useLocation();
     const from=location.state?.from?.pathname || '/';
     const axiosPublic=UseAxiosPublic();
     const navigate=useNavigate();
@@ -17,8 +18,8 @@ const SocialLogin = () => {
             name: result.user?.displayName,
            }
            axiosPublic.post('/users',userInfo)
-           .then(res=>{
-            console.log(res.data)
+           .then(()=>{
+            // console.log(res.data)
            navigate(from,{replace:true})
            })
         })

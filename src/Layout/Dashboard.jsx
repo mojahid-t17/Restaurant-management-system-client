@@ -16,8 +16,8 @@ const Dashboard = () => {
 
   return (
     <div className="flex">
-      <div className="w-64 h-svw bg-[#D1A054]">
-        <ul className="text-center space-y-5">
+      <div className="w-64  min-h-svh bg-[#D1A054]">
+        <ul className="text-center fixed space-y-5">
           {/* Brand Section */}
           <li>
             <div className="md:w-28 w-20 ms-8 px-3 my-8">
@@ -35,12 +35,12 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/add-items" className={navLinkClass}>
+                <NavLink to="/dashboard/addItems" className={navLinkClass}>
                   <IoIosRestaurant /> Add Items
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/manage-items" className={navLinkClass}>
+                <NavLink to="/dashboard/manageItems" className={navLinkClass}>
                   <IoList /> Manage Items
                 </NavLink>
               </li>

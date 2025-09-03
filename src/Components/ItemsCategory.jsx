@@ -6,6 +6,7 @@ const ItemsCategory = ({ btnText, category }) => {
   const [menu] = UseMenu();
   // console.log(menues)
   const items = menu.filter((items) => items.category === category);
+  // console.log(items)
   return (
     <div>
       <div className="grid grid-cols-1 px-5 md:grid-cols-2 gap-4 space-y-4 my-6">
