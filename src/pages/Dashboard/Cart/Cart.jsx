@@ -1,11 +1,14 @@
+import { useEffect } from 'react';
 import { AiFillDelete } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
 import UseCart from "../../../Hooks/UseCart";
-
 const Cart = () => {
   const [cart, refetch] = UseCart();
+  // console.log(cart)
+  const navigate=useNavigate();
   const axiosSecure = UseAxiosSecure();
   const totalPrice=cart.reduce((previous,current)=>previous+current.price,0)
   const handleDeleteCart = (id) => {
@@ -36,15 +39,25 @@ const Cart = () => {
 
    
   };
+  const handlePayment=()=>{
+    if(totalPrice>0){
+       navigate(`/dashboard/payment`) 
+    }
+       
+  } 
+  useEffect(() => {
+      document.title = "Your Cart"; 
+    }, []);
   return (
     <div className="px-8">
+        
       <div className="mt-8">
         <SectionTitle
           title="WANNA ADD MORE?"
           subtitle="---My Cart---"
         ></SectionTitle>
       </div>
-      <div className="flex justify-around my-5">
+      <div className="sm:flex space-y-4 justify-around my-5">
         <div>
           <h2 className="text-xl">Total orders: {cart.length}</h2>
         </div>
@@ -52,7 +65,7 @@ const Cart = () => {
           <h2 className="text-xl font-bold">Total price: ${totalPrice}</h2>
         </div>
         <div>
-          <button className="btn bg-[#D1A054] text-white">Pay</button>
+         <button onClick={()=>handlePayment()}  className="btn bg-[#D1A054] text-white">Pay</button>
         </div>
       </div>
 

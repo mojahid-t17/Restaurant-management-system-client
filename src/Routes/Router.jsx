@@ -8,6 +8,8 @@ import AddItems from "../pages/Dashboard/AddItems/AddItems";
 import AllUsers from "../pages/Dashboard/Allusers/AllUsers";
 import Cart from "../pages/Dashboard/Cart/Cart";
 import ManageItems from "../pages/Dashboard/ManageItems/ManageItems";
+import Payment from "../pages/Dashboard/Payment/Payment";
+import PaymentHistory from "../pages/Dashboard/Payment/PaymentHistory";
 import UpdateItem from "../pages/Dashboard/UpdateItem/UpdateItem";
 import FoodOrder from "../pages/FoodOrder/FoodOrder";
 import Home from "../pages/Home/Home/Home";
@@ -52,6 +54,16 @@ export const router = createBrowserRouter([
         path:'cart',
         element: <PrivateRoute><Cart></Cart></PrivateRoute>
       },
+
+      {
+       path:'payment',
+       element: <PrivateRoute><Payment></Payment></PrivateRoute>
+      },
+      {
+        path:'paymentHistory',
+        element:<PrivateRoute><PaymentHistory></PaymentHistory></PrivateRoute>
+      },
+    
 
       // admin routes
       {

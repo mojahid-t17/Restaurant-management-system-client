@@ -16,7 +16,7 @@ const FoodOrder = () => {
   const [tabIndex, setTabIndex] = useState(initialIndex);
 
  useEffect(() => {
-    document.title = "OUR SHOP"; // Ensure the browser updates instantly
+    document.title = "OUR SHOP"; 
   }, []);
   return (
     <div className="max-w-6xl mx-auto ">

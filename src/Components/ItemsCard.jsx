@@ -1,10 +1,12 @@
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import CardBtn from "./CardBtn";
-
 const ItemsCard = ({item}) => {
   const { name, recipe, price,image } = item;
  
     return (
          <div className="card sm:max-w-sm shadow bg-slate-200/40">
+           < ToastContainer  autoClose={5000} />
           <figure>
             <img
               src={image}

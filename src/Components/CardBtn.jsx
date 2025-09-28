@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Swal from "sweetalert2";
 import UseAuth from "../Hooks/UseAuth";
 import UseAxiosSecure from "../Hooks/UseAxiosSecure";
@@ -28,8 +28,9 @@ const CardBtn = ({menu}) => {
        }
             axiosSecure.post('/carts',cartItem)
        .then(()=>{
-        refetch()
-       toast.success("Successfully add to Cart!")
+        
+        toast.success("Successfully add to Cart!",{autoClose: 5000,closeOnClick: true,})
+        refetch();
        })
         
       }
@@ -51,12 +52,16 @@ const CardBtn = ({menu}) => {
       
     }
     return (
+      <>
         <div>
-          <ToastContainer />
+         
               <button  onClick={handleCartItem} className="btn border-b-2 border-yellow-500 text-yellow-500 hover:bg-[#1F2937] border-x-0 border-t-0 uppercase">
                 add to cart
               </button>
         </div>
+       
+       </>
+        
     );
 };
 

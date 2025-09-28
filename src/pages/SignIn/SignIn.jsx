@@ -6,16 +6,16 @@ import {
   loadCaptchaEnginge,
   validateCaptcha,
 } from "react-simple-captcha";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 import signinImg from "../../assets/others/authentication2.png";
 import SocialLogin from "../../Components/SocialLogin";
 import { AuthContext } from "../../Provider/AuthProvider";
 const SignIn = () => {
-  const {signInUser}=useContext(AuthContext)
+  const { signInUser } = useContext(AuthContext);
   const [errMsg, setErrMsg] = useState("");
-  const navigate=useNavigate();
-  const location=useLocation();
-  const from=location.state?.from?.pathname || '/';
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
@@ -26,37 +26,34 @@ const SignIn = () => {
     loadCaptchaEnginge(6);
   }, []);
 
-const onSubmit = (data) => {
-  setErrMsg(""); // Clear any previous message
+  const onSubmit = (data) => {
+    setErrMsg(""); // Clear any previous message
 
-  // Don't validate CAPTCHA if it's empty — react-hook-form handles that
-  if (!data.captcha) return;
+    // Don't validate CAPTCHA if it's empty — react-hook-form handles that
+    if (!data.captcha) return;
 
-  const isCaptchaValid = validateCaptcha(data.captcha);
+    const isCaptchaValid = validateCaptcha(data.captcha);
 
-  if (!isCaptchaValid) {
-    setErrMsg("Captcha doesn't match");
-    return;
-  }
-  
- signInUser(data.email,data.password)
- .then(res=>{
-  navigate(from,{replace:true})
-  console.log(res)})
- .catch(err=>{
-  if(err.message=='Firebase: Error (auth/invalid-credential).'){
-     toast.error('Invalid email or Password !')
-  }
-  })
-};
+    if (!isCaptchaValid) {
+      setErrMsg("Captcha doesn't match");
+      return;
+    }
 
-
-
-
+    signInUser(data.email, data.password)
+      .then((res) => {
+        navigate(from, { replace: true });
+        console.log(res);
+      })
+      .catch((err) => {
+        if (err.message == "Firebase: Error (auth/invalid-credential).") {
+          toast.error("Invalid email or Password !");
+        }
+      });
+  };
 
   return (
     <div>
-       <ToastContainer />
+      <ToastContainer />
       <div className="hero bg-base-200 min-h-screen pt-12">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:text-left  lg:w-1/2">
@@ -100,30 +97,26 @@ const onSubmit = (data) => {
                 </div>
                 <div className="space-y-1 text-sm block text-gray-400 mb-2">
                   <label htmlFor="captcha">
-                    
-                      <LoadCanvasTemplate />
-                    
+                    <LoadCanvasTemplate />
                   </label>
 
                   <input
                     {...register("captcha", { required: true })}
-                    
                     type="text"
                     name="captcha"
                     id="captcha"
                     placeholder="Enter the text Captcha to login"
                     className="w-full px-4 py-3 rounded-md border-gray-700 border"
                   />
-                {errors.captcha && (
-  <span className="text-red-500 text-sm">
-    Captcha is required
-  </span>
-)}
+                  {errors.captcha && (
+                    <span className="text-red-500 text-sm">
+                      Captcha is required
+                    </span>
+                  )}
 
-{!errors.captcha && errMsg && (
-  <span className="text-red-500 text-sm">{errMsg}</span>
-)}
-
+                  {!errors.captcha && errMsg && (
+                    <span className="text-red-500 text-sm">{errMsg}</span>
+                  )}
 
                   <div className="flex justify-end text-xs text-gray-400">
                     <a rel="noopener noreferrer" href="#"></a>
