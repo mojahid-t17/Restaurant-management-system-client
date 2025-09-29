@@ -75,7 +75,7 @@ const Dashboard = () => {
                   <FaUsers /> All Users
                 </NavLink>
               </li>
-               <li>
+                <li>
                 <NavLink to="/dashboard/payment" className={navLinkClass} onClick={handleLinkClick}>
                   <FaCalendarAlt /> Reservation
                 </NavLink>

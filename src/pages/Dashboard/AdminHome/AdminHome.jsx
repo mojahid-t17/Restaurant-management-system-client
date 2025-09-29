@@ -1,82 +1,121 @@
-import { FaBox, FaMoneyBillWave, FaShoppingCart, FaUsers } from "react-icons/fa";
-import { Cell, Legend, Pie, PieChart, Tooltip } from "recharts";
+
+
+
+import { useEffect, useState } from "react";
+import {
+  FaBoxOpen,
+  FaDollarSign,
+  FaShoppingCart,
+  FaUsers,
+} from "react-icons/fa";
+import {
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
+import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
+
+const COLORS = ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50", "#A020F0", "#FF7F50"];
 
 const AdminHome = () => {
-  // Example data
-  const revenue = 12000;
-  const customers = 350;
-  const products = 85;
-  const orders = 230;
+  const axiosSecure = UseAxiosSecure();
+  const [stats, setStats] = useState({});
+  const [menuStats, setMenuStats] = useState([]);
 
-  const pieData = [
-    { name: "Dessert", value: 30 },
-    { name: "Pizza", value: 45 },
-    { name: "Salad", value: 25 },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch admin stats (revenue, users, products, orders)
+        const statsRes = await axiosSecure.get("/admin-stats");
+        setStats(statsRes.data);
 
-  const COLORS = ["#facc15", "#f87171", "#34d399"]; 
+        // Fetch product category distribution
+        const menuRes = await axiosSecure.get("/menu-stats");
+        console.log("Menu Stats from API:", menuRes.data);
+        setMenuStats(menuRes.data);
+      } catch (error) {
+        console.error("Error loading admin data:", error);
+      }
+    };
+
+    fetchData();
+  }, [axiosSecure]);
 
   return (
-    <div className="p-6 space-y-6">
-      {/* Header */}
-      <h1 className="text-2xl font-bold">Hi, Welcome Back!</h1>
+    <div className="p-6 space-y-8">
+      <h2 className="text-2xl font-bold">Hi, Welcome Back!</h2>
 
-      {/* Stats Cards */}
+      {/* Top Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="stat bg-yellow-100 rounded-xl shadow-md">
-          <div className="stat-figure text-yellow-600 text-3xl">
-            <FaMoneyBillWave />
+        <div className="card bg-gradient-to-r from-purple-500 to-pink-300 shadow-md text-white p-6 flex items-center gap-4">
+          <FaDollarSign className="text-3xl" />
+          <div>
+            <p className="text-lg">Revenue</p>
+            <h2 className="text-2xl font-bold">
+              ${stats.revenue ? stats.revenue.toFixed(2) : 0}
+            </h2>
           </div>
-          <div className="stat-title">Revenue</div>
-          <div className="stat-value">${revenue}</div>
         </div>
 
-        <div className="stat bg-green-100 rounded-xl shadow-md">
-          <div className="stat-figure text-green-600 text-3xl">
-            <FaUsers />
+        <div className="card bg-gradient-to-r from-green-500 to-green-300 shadow-md text-white p-6 flex items-center gap-4">
+          <FaUsers className="text-3xl" />
+          <div>
+            <p className="text-lg">Customers</p>
+            <h2 className="text-2xl font-bold">{stats.users || 0}</h2>
           </div>
-          <div className="stat-title">Customers</div>
-          <div className="stat-value">{customers}</div>
         </div>
 
-        <div className="stat bg-blue-100 rounded-xl shadow-md">
-          <div className="stat-figure text-blue-600 text-3xl">
-            <FaBox />
+        <div className="card bg-gradient-to-r from-yellow-500 to-orange-300 shadow-md text-white p-6 flex items-center gap-4">
+          <FaBoxOpen className="text-3xl" />
+          <div>
+            <p className="text-lg">Products</p>
+            <h2 className="text-2xl font-bold">{stats.products || 0}</h2>
           </div>
-          <div className="stat-title">Products</div>
-          <div className="stat-value">{products}</div>
         </div>
 
-        <div className="stat bg-pink-100 rounded-xl shadow-md">
-          <div className="stat-figure text-pink-600 text-3xl">
-            <FaShoppingCart />
+        <div className="card bg-gradient-to-r from-pink-500 to-red-300 shadow-md text-white p-6 flex items-center gap-4">
+          <FaShoppingCart className="text-3xl" />
+          <div>
+            <p className="text-lg">Orders</p>
+            <h2 className="text-2xl font-bold">{stats.orders || 0}</h2>
           </div>
-          <div className="stat-title">Orders</div>
-          <div className="stat-value">{orders}</div>
         </div>
       </div>
 
-      {/* Pie Chart */}
-      <div className="bg-white shadow-md rounded-xl p-6 w-full md:w-1/2">
-        <h2 className="text-lg font-semibold mb-4">Products Distribution</h2>
-        <PieChart width={400} height={300}>
-          <Pie
-            data={pieData}
-            dataKey="value"
-            nameKey="name"
-            cx="50%"
-            cy="50%"
-            outerRadius={100}
-            fill="#8884d8"
-            label
-          >
-            {pieData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-          <Tooltip />
-          <Legend />
-        </PieChart>
+      {/* Product Category Pie Chart */}
+      <div className="p-6">
+        <h2 className="text-2xl font-bold mb-6">Product Categories</h2>
+        <div className="card shadow-md p-6">
+          {menuStats.length > 0 ? (
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={menuStats}
+                  dataKey="totalProducts"
+                  nameKey="category"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={100}
+                  label
+                >
+                  {menuStats.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          ) : (
+            <p className="text-center text-gray-500">No data available</p>
+          )}
+        </div>
       </div>
     </div>
   );

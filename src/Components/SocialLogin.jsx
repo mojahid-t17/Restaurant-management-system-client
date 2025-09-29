@@ -44,7 +44,7 @@ const SocialLogin = () => {
       Swal.fire({
         icon: "error",
         title: "Login Failed",
-        text: error.message,
+        text: "something wrong ! try again",
       });
     }
   };
