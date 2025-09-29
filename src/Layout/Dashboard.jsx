@@ -7,8 +7,7 @@ import UseAdmin from "../Hooks/UseAdmin";
 
 const Dashboard = () => {
   const [isAdmin] = UseAdmin();
-  const [isOpen, setIsOpen] = useState(false); // mobile sidebar toggle
-
+  const [isOpen, setIsOpen] = useState(false); 
   const navLinkClass = ({ isActive }) =>
     `flex items-center gap-2 px-3 py-2 uppercase rounded-md ${
       isActive ? "bg-[#B8873F] text-white font-bold" : "text-black hover:bg-[#E0C68C]"
@@ -57,7 +56,7 @@ const Dashboard = () => {
           {isAdmin ? (
             <>
               <li>
-                <NavLink to="/admin-home" className={navLinkClass} onClick={handleLinkClick}>
+                <NavLink to="/dashboard/adminHome" className={navLinkClass} onClick={handleLinkClick}>
                   <IoMdHome /> Admin Home
                 </NavLink>
               </li>
@@ -76,11 +75,21 @@ const Dashboard = () => {
                   <FaUsers /> All Users
                 </NavLink>
               </li>
+               <li>
+                <NavLink to="/dashboard/payment" className={navLinkClass} onClick={handleLinkClick}>
+                  <FaCalendarAlt /> Reservation
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/paymentHistory" className={navLinkClass} onClick={handleLinkClick}>
+                  <FaCartArrowDown /> Payment History
+                </NavLink>
+              </li>
             </>
           ) : (
             <>
               <li>
-                <NavLink to="/user-home" className={navLinkClass} onClick={handleLinkClick}>
+                <NavLink to="/dashboard/userHome" className={navLinkClass} onClick={handleLinkClick}>
                   <IoMdHome /> User Home
                 </NavLink>
               </li>

@@ -5,7 +5,7 @@ import UseAxiosPublic from "../Hooks/UseAxiosPublic";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const SocialLogin = () => {
-  const { signInwithGogle, user } = useContext(AuthContext);
+  const { signInWithGoogle, user } = useContext(AuthContext);
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const axiosPublic = UseAxiosPublic();
@@ -20,7 +20,7 @@ const SocialLogin = () => {
 
   const handleSignIn = async () => {
     try {
-      const result = await signInwithGogle();
+      const result = await signInWithGoogle();
 
       const userInfo = {
         email: result.user?.email,

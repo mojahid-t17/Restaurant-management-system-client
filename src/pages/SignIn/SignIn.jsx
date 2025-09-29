@@ -40,9 +40,9 @@ const SignIn = () => {
     }
 
     signInUser(data.email, data.password)
-      .then((res) => {
+      .then(() => {
         navigate(from, { replace: true });
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => {
         if (err.message == "Firebase: Error (auth/invalid-credential).") {

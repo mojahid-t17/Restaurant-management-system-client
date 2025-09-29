@@ -9,7 +9,7 @@ const PrivateRoute = ({children}) => {
         return children;
     }
     if(loader){
-        return <span className="loading loading-spinner text-error"></span>
+        return <span className="loading loading-spinner text-error  px-8"></span>
     }
 
     return (
