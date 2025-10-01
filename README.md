@@ -1,12 +1,58 @@
-# React + Vite
+# 🍽️ Restaurant Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack **Restaurant Management System** built with React, Node.js/Express, and MongoDB.  
+This project provides a complete platform for customers to browse food items, place orders, and make secure payments. Admins can manage menu items, users, and track orders with powerful dashboard analytics.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Demo
+- **Client (Firebase Hosting):** [Food Pilot Restaurant (Client)](https://food-pilot-restaurant-cc10e.web.app/)  
+- **Server (Vercel Hosting):** [Food Pilot Restaurant (Server)](https://food-pilot-restaurant-server.vercel.app/)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 👥 Sample Credentials
+
+### User
+- **Email:** `user1@gmail.com`  
+- **Password:** `User@1`
+
+### Admin
+- **Email:** `admin1@gmail.com`  
+- **Password:** `Admin@1`
+
+---
+
+## 🔑 Features
+- ✅ **User Authentication** using **JWT**
+- ✅ **Admin Verification** for secure route access
+- ✅ **Secure Payments** integrated with **Stripe**
+- ✅ **Menu Management** (Add, update, delete food items)
+- ✅ **Order Tracking** with category statistics
+- ✅ **User Dashboard** with order history
+- ✅ **Admin Dashboard** with revenue, users, and category-wise pie chart
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend (Client)
+- **React.js**
+- **React Ratings**
+- **React Simple Captcha**
+- **Swiper.js**
+- **React Hook Form**
+- **TanStack Query** (React Query)
+- **Custom Hooks** for reusable logic
+- **Firebase Authentication**
+
+### Backend (Server)
+- **Node.js & Express.js**
+- **MongoDB**
+- **JWT Authentication**
+- **Stripe Payment Gateway**
+- **Vercel Deployment**
+
+---
+
+
